@@ -10,39 +10,19 @@ class Numbers {
     public static void main(String[] args) {
         //Part I :complete the static class methods that have been set up in this Numbers class java file.  Use streams to compute the results wheever possible.
 
+        fun2 lambdaIsOdd = (int x) -> isOdd(x);
+        fun2 lambdaIsEven = (int x) -> isEven(x);
+        fun2 lambdaIsPrime = (int x) -> isPrime(x);
+        fun3 lambdaAdded = () -> added();
+        fun3 lambdaSubtracted = () -> subtracted();
+        fun3 lambdaMultiplied = () -> multipled();
+        fun3 lambdaDivide = () -> divided();
+        fun3 lambdaFindMax = () -> findMax();
+        fun3 lambdaFindMin = () -> findMin();
+        fun1 lambdaCompare = (int x, int y) -> compare(x, y);
+        fun4 lambdaAppend = (int x) -> append(x);
 
-        lambdaIsOdd = (i) -> {};
-        isOdd(lambdaIsOdd);
-
-        lambdaisEven = (i) -> {};
-        isEven(lambdaisEven);
-
-        lambdaisPrime = (i) -> {};
-        isPrime(lambdaisPrime);
-
-        lambdaAdded = () -> {};
-        added(lambdaAdded);
-
-        lambdaSubtracted = () -> {};
-        subtracted(lambdaSubtracted);
-
-        lambdaMultiplied = () -> {};
-        multipled(lambdaMultipled);
-
-        lambdaDivided = () -> {};
-        divided(lambdaDivided);
-
-        lambdaFindMin = () -> {};
-        findMin(lambdaFindMin);
-
-        lambdaFindMax = () -> {};
-        findMax(lambdaFindMax);
-
-        lambdaCompare = (x, y) -> {};
-        compare(x, y);
-
-        lambdaAppend = (x) -> {};
-        append(lambdaAppend);
+        System.out.println(lambdaIsOdd.op(3));
 
         //Part II - refactor all of the class methods to accept lambda expressions. You can put the lambda functions directly inside the method calls, or defined them first, then pass them into the methods. give them the same names as the static methods, but add the word 'lambda' in front of every lambda function:
         /* e.g.
@@ -66,9 +46,41 @@ class Numbers {
 
     }
 
+    interface fun1 {
+        int op(int a, int b);
+    }
+
+    interface fun2 {
+        boolean op(int a);
+    }
+
+    interface fun3 {
+        int op();
+    }
+
+    interface fun4 {
+        int op(int a);
+    }
+
+    private int operate(int a, int b, fun1 fObj) {
+        return fObj.op(a, b);
+    }
+
+    private boolean operate2(int a, fun2 fObj) {
+        return fObj.op(a);
+    }
+
+    private int operate3(fun3 fObj) {
+        return fObj.op();
+    }
+
+    private int operate4(int a, fun4 fObj) {
+        return fObj.op(a);
+    }
+
     static boolean isOdd(int i) {
         //determine if the value at the index i is odd.  return true if yes, return false if  no.
-        if (i % 2 != 0) {
+        if (nums.get(i) % 2 != 0) {
             return true;
         } else{
             return false;
@@ -78,7 +90,7 @@ class Numbers {
 
     static boolean isEven(int i) {
         //determine if the value at the index i is even.  return true if yes, return false if  no.
-        if (i % 2 == 0) {
+        if (nums.get(i) % 2 == 0) {
             return true;
         } else {
             return false;
@@ -98,7 +110,8 @@ class Numbers {
 
     static int added() {
         //add all the elements in the list.  return the sum.
-        int sum = nums.stream().mapToInt(Integer::intValue).sum();
+        int sum = nums.stream()
+                .mapToInt(Integer::intValue).sum();
         return sum;
     }
 
@@ -124,14 +137,16 @@ class Numbers {
     }
 
     static int findMax() {
-        int  maxNum = nums.stream().collect(Collectors.summarizingInt(Integer::intValue)).getMax();
+        int  maxNum = nums.stream()
+                .collect(Collectors.summarizingInt(Integer::intValue)).getMax();
          //return the maximum value in the list.
         return maxNum;
     }
 
     static int findMin() {
         //return the minimum value in the list.
-        int minNum = nums.stream().collect(Collectors.summarizingInt(Integer::intValue)).getMin();
+        int minNum = nums.stream()
+                .collect(Collectors.summarizingInt(Integer::intValue)).getMin();
         return 0;
     }
 

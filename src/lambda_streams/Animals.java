@@ -70,7 +70,6 @@ class Animals {
                     .collect(Collectors.toList());
                     return newList;
         }
-
     }
 
     static List<String> flipAnimals(boolean mutate) {
