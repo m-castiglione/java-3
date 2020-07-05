@@ -22,10 +22,15 @@ class Sync extends Thread {
     }
 
     public static void main(String[] args)  {
-        Sync syncThread = new Sync("sync thread");
-        syncThread.start();
+        try{
+            Sync syncThread = new Sync("sync thread");
+            syncThread.start();
+            syncThread.join();
+            System.out.println(syncThread.nums);
+        } catch (Exception e) {
+            System.out.println("foo");
+        }
 
-        System.out.println(syncThread.nums);
         //this prints out an empty list. write some code that will allow the data generated in the syncThread to show up  here.  There is a brute force way and a more sophisticated way.  Either or will work, but strive for sophistication :)
 
     }
